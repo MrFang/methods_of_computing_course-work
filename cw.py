@@ -22,7 +22,7 @@ def solution(n):
         temp_z = prev_z + step*f(prev_t, prev_fi)
         temp_fi = prev_fi + step*prev_z
 
-        z = prev_z + step*(f(prev_t, prev_fi) + prev_fi)/2
+        z = prev_z + step*(f(prev_t, prev_fi) + f(t, temp_fi))/2
         fi = prev_fi + step*(prev_z + z)/2
 
         prev_t = t
