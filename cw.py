@@ -38,7 +38,7 @@ while(True):
     y_1 = solution(n)[-1][1]
     y_2 = solution(2*n)[-1][1]
 
-    if (abs(y_1 - y_2)) < EPS:
+    if abs(y_1 - y_2)/3 < EPS:
         print(y_2)
         break
     n = 2*n
