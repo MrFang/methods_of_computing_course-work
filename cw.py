@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 A = [0.5, 1, 2]
 G = 9.81
 OMEGA = sqrt(G)
-EPS = 10**(-5)
 
 def getF(a):
     def f(t, fi):
@@ -50,14 +49,13 @@ for a in A:
 
         """
             x = sin(fi)
-            Если мы промахивается на 1 градус, то смещение по x = sin(1deg)
-            1 rad = 180/pi grad
-            Мы знаем погрешность fi = alpha rad, тогда погрешность x = sin(180*a/pi)
+            Если мы промахивается на 1 rad, то смещение по x = sin(1)
+            Мы знаем погрешность fi = alpha rad, тогда погрешность x = sin(alpha)
         """
         alpha = abs(fi1[-1][1] - fi2[-1][1])/3
 
-        if abs(sin(180*alpha/pi)) < 0.01:
-            result = (fi2)
+        if abs(sin(alpha)) < 0.001:
+            result = fi2
             break
 
         n = 2*n
