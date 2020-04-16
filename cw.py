@@ -6,7 +6,7 @@ OMEGA = sqrt(G)
 EPS = 10**(-5)
 
 def f(t, fi):
-    return G*sin(fi) + A*sin(OMEGA*t)*cos(fi)
+    return -G*sin(fi) + A*sin(OMEGA*t)*cos(fi)
 
 def solution(n):
     step = 30/n
@@ -23,7 +23,7 @@ def solution(n):
         temp_fi = prev_fi + step*prev_z
 
         z = prev_z + step*(f(prev_t, prev_fi) + f(t, temp_fi))/2
-        fi = prev_fi + step*(prev_z + z)/2
+        fi = prev_fi + step*(prev_z + temp_z)/2
 
         prev_t = t
         prev_z = z
@@ -32,4 +32,13 @@ def solution(n):
     
     return result
 
-print(solution(32))
+n = 2
+
+while(True):
+    y_1 = solution(n)[-1][1]
+    y_2 = solution(2*n)[-1][1]
+
+    if (abs(y_1 - y_2)) < EPS:
+        print(y_2)
+        break
+    n = 2*n
