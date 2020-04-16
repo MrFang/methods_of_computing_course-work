@@ -1,14 +1,20 @@
-from math import sin, cos, sqrt
+from math import sin, cos, sqrt, pi
+from functools import reduce
 
-A = 1
+import matplotlib.pyplot as plt
+
+A = [0.5, 1, 2]
 G = 9.81
 OMEGA = sqrt(G)
 EPS = 10**(-5)
 
-def f(t, fi):
-    return -G*sin(fi) + A*sin(OMEGA*t)*cos(fi)
+def getF(a):
+    def f(t, fi):
+        return -G*sin(fi) + a*sin(OMEGA*t)*cos(fi)
+    
+    return f
 
-def solution(n):
+def solution(f, n):
     step = 30/n
     prev_t = t = 0
     prev_z = z = 0
@@ -32,13 +38,39 @@ def solution(n):
     
     return result
 
-n = 2
 
-while(True):
-    y_1 = solution(n)[-1][1]
-    y_2 = solution(2*n)[-1][1]
+for a in A:
+    result = []
+    f = getF(a)
+    n = 2
 
-    if abs(y_1 - y_2)/3 < EPS:
-        print(y_2)
-        break
-    n = 2*n
+    while(True):
+        fi1 = solution(f, n)
+        fi2 = solution(f, 2*n)
+
+        """
+            x = sin(fi)
+            Если мы промахивается на 1 градус, то смещение по x = sin(1deg)
+            1 rad = 180/pi grad
+            Мы знаем погрешность fi = alpha rad, тогда погрешность x = sin(180*a/pi)
+        """
+        alpha = abs(fi1[-1][1] - fi2[-1][1])/3
+
+        if abs(sin(180*alpha/pi)) < 0.01:
+            result = (fi2)
+            break
+
+        n = 2*n
+    
+
+    x, y = [], []
+    for point in result:
+        x.append(point[0])
+        y.append(point[1])
+
+    plt.plot(x, y)
+    print (
+        f'A = {a}\n'
+        f'|Fi_max| = {reduce(lambda acc, val: abs(val) if abs(val) > acc else acc, y, abs(y[0])):5.2f}'
+    )
+    plt.show()
