@@ -51,7 +51,6 @@ for a in A:
 
         if sqrt(2*abs(1-cos(alpha))) < 0.001:
             result = fi2
-            print(n)
             break
 
         n = 2*n
