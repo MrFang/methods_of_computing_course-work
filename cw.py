@@ -1,7 +1,7 @@
 from math import sin, cos, sqrt, pi
 from functools import reduce
 
-import matplotlib.pyplot as plt
+from matplotlib import pyplot as plt
 
 A = [0.5, 1, 2]
 G = 9.81
