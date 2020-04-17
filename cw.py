@@ -47,14 +47,9 @@ for a in A:
         fi1 = solution(f, n)
         fi2 = solution(f, 2*n)
 
-        """
-            x = sin(fi), y = cos(fi)
-            Если мы промахивается на 1 rad от нуля, то смещение по x = sin(1), по y = 1 - cos(1)
-            Мы знаем погрешность fi = alpha rad, тогда погрешность x = sin(alpha), y = 1 - cos(alpha)
-        """
         alpha = abs(fi1[-1][1] - fi2[-1][1])/3
 
-        if abs(sin(alpha)) < 0.001 and abs(1-cos(alpha)) < 0.001:
+        if 2*abs(1-cos(alpha)) < 0.001:
             result = fi2
             break
 
