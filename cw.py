@@ -49,8 +49,9 @@ for a in A:
 
         alpha = abs(fi1[-1][1] - fi2[-1][1])/3
 
-        if 2*abs(1-cos(alpha)) < 0.001:
+        if sqrt(2*abs(1-cos(alpha))) < 0.001:
             result = fi2
+            print(n)
             break
 
         n = 2*n
