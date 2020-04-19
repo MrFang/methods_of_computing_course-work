@@ -50,6 +50,12 @@ for a in A:
         alpha = abs(fi1[-1][1] - fi2[-1][1])/3
 
         if sqrt(2*abs(1-cos(alpha))) < 0.001:
+            errs = []
+            for idx, point in enumerate(fi1):
+                err = abs(point[1] - fi2[2*idx][1])/3
+                if sqrt(2*abs(1-cos(err))) >= 0.001:
+                    errs.append(sqrt(2*abs(1-cos(err))) - 0.001)
+            print(len(errs), max(errs) if len(errs) > 0 else "")
             result = fi2
             break
 
